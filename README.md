@@ -1,224 +1,127 @@
-# Academic Automation Skill
+![Academic Automation Skill — literature search and download](assets/readme-banner.png)
+
+# <img src="assets/logo.png" alt="" width="48" height="48" align="center"> Academic Automation Skill
 
 **English** | [简体中文](README.zh-CN.md)
 
-> **IMPORTANT — ACCESSIBILITY PERMISSIONS AND SAFETY: This Skill will have your Agent/Harness request system Accessibility permission, plus automation access to Chrome / System Events, when performing macOS UI automation and native PDF saving. Accessibility permission allows an application to control system UI beyond an individual webpage. If you have any security concerns, DO NOT USE THIS SKILL or grant these permissions.**
+> **IMPORTANT, ACCESSIBILITY PERMISSIONS AND SAFETY: On macOS, this Skill makes your Agent/Harness request system Accessibility permission and automation access to Chrome and System Events, which it uses for UI automation and native PDF saving. Accessibility permission lets an application control the whole system UI, beyond any single webpage. If you have any security concerns, DO NOT USE THIS SKILL and do not grant these permissions.**
 >
-> **This notice ships in both Windows and macOS packages. Windows currently uses the Playwright extension for webpages and leaves system Save dialogs to the user. Assess any additional system-control permissions requested by your Agent/Harness carefully.**
+> **This notice ships in both the Windows and macOS packages. On Windows the Skill currently drives webpages through the Playwright extension and leaves system Save dialogs to you. If your Agent/Harness asks for any other system-control permission, assess it carefully.**
 
-**2.0.0 RC1** is the current release candidate. It includes the Beta 4 fixes for PubMed transfers and PDF verification, adds an explicit PMC-only route and durable batch cancellation, and accepts UTF-8 query files for complex Windows search expressions. See the [release notes](RELEASE_NOTES.md) and [verification record](VERIFICATION.md).
+Install this Skill in an AI agent and you can ask the agent for papers in plain language. It searches PubMed and CNKI, and can also use Web of Science or Google Scholar. It writes a bibliography with a link for every entry, and downloads full texts into your library folder when you already have access to them. It stops and asks you when it hits a login page or a CAPTCHA, or needs a decision from you.
 
-macOS browser workflows use **Apple Events only**. Windows browser workflows require the official Playwright extension and a Token before a new connection. PubMed API tasks and explicit PMC-only downloads need neither the extension nor a browser. PDF viewer saving through Playwright still requires a user choice if automatic saving fails. Download Windows, macOS, or the optional [Legacy Version 1 for macOS](LEGACY.md) from the [Latest Release](https://github.com/Alexme9125/academic-automation-skill/releases/latest). Packages do not bundle runtimes; read the [Windows](references/install-windows.md) or [macOS](references/install-macos.md) installation guide.
+Everything runs in your own logged-in Chrome with your own account or institutional access. The project provides no database accounts and cannot get you paid papers for free.
 
-> An AI skill for automating academic literature search and download workflows.
+The current version is **2.0.0 RC1** (release candidate). See the [release notes](RELEASE_NOTES.md) for changes and the [verification record](VERIFICATION.md) for what has been tested.
 
-**Academic Automation Skill** is a personal AI Skill designed to help AI agents automate repetitive academic literature workflows through a web browser, including literature searching, preliminary filtering, downloading, and organization.
+## What you can ask for
 
-It currently supports **PubMed**, **CNKI**, **Google Scholar**, and **Web of Science**.
-
-This project is developed primarily through **Vibe Coding** and is continuously tested and improved through real-world academic literature workflows.
-
----
-
-## Features
-
-### Automated Literature Search
-
-Search supported academic databases automatically based on research topics, keywords, and other criteria provided by the user.
-
-### Literature Filtering
-
-Perform preliminary filtering based on titles, keywords, abstracts, and other available metadata to reduce repetitive manual review.
-
-### Literature Download
-
-When the user already holds legitimate access to a paper, parts of the download process are automated.
-
-**Reliable automatic saving from a PDF viewer is not established for the Playwright route.** If automatic saving and file recovery yield no file, the Agent asks whether to deliver bibliography only or preserve each paper’s tab for batch manual downloading. It waits for your choice, then verifies and archives manually saved files.
-
-Academic Automation Skill does **not** provide database accounts, subscriptions, institutional access, or paid content.
-
-All access is performed through the **user's own browser, account, subscription, and/or institutional access privileges**.
-
-### Literature Organization
-
-Organize downloaded literature and related information to reduce repetitive post-download processing.
-
----
-
-## Supported Platforms
-
-| Platform | Status |
+| Task | Example request |
 | --- | --- |
-| PubMed | Preview; official API and PMC downloads |
-| CNKI | Supported |
-| Google Scholar | Supported |
-| Web of Science | Supported |
+| Search a topic and list the results | "Find Chinese journal papers on project-based learning in CNKI, bibliography only" |
+| Search and download what is available | "Search PubMed for Mendelian randomization and download what you can" |
+| Download from a list | "Download these titles from CNKI one by one; first authors are in column 2" |
+| Use PMC only, no browser | "Get these PMIDs from PMC only and keep the rest as bibliography entries" |
+| Download by DOI | "Download the full text of this DOI into papers/english" |
 
-Academic platforms may change their page structures, authentication mechanisms, or access policies. Some automation features may therefore temporarily stop working after platform updates.
+### Supported sources
 
----
+| Source | Search and bibliography | Full-text download | Status |
+| --- | --- | --- | --- |
+| PubMed | Official API, no browser needed | Public PMC PDFs; others through the publisher | Preview |
+| CNKI Chinese library | Basic and expert search | Yes; the first author is required | Supported |
+| CNKI foreign library (WWJD) | Yes | No CNKI download button; goes to the publisher with the full DOI | Supported |
+| Web of Science | Yes | Through the publisher by DOI | Supported |
+| Google Scholar | Yes | Through the publisher by DOI | Supported |
 
-## Requirements
+Every bibliography entry links to its publication page, and entries without a link are listed separately as incomplete. Downloaded files are checked for completeness before archiving. With the optional `pypdf` package installed, the Skill also compares the title and authors on the first page, so a supplement or a different paper is not counted as the article. Files go into your existing folder structure and never overwrite a file with the same name. Interrupted searches and batch downloads can be resumed.
 
-### Operating System
+Some automation may stop working for a while after a database changes its pages or login flow.
 
-Windows 10/11: preview support through Playwright CLI and the official Chrome extension; Windows testers have reported PubMed search, bibliography and two PMC downloads; RC1 extension and publisher flows still need Windows acceptance.
+## Platforms and requirements
 
-macOS: use Apple Events only, with System Events for native saving. Skill workflows must not use Playwright or switch to it after a failure.
+| Platform | How the browser is controlled | Status |
+| --- | --- | --- |
+| macOS | Apple Events drive your everyday Chrome; native Save dialogs are handled through System Events. Playwright is not used | Main development and testing platform |
+| Windows 10/11 | Playwright CLI with the official Chrome extension; an extension Token is required before the first connection | Preview. Testers have reported PubMed search, bibliography and two PMC downloads working; the RC1 extension and publisher flows still need Windows acceptance testing |
+| Linux | None | Offline processing only |
 
-The shared core needs Python 3.9+. For new installations use a supported Python release. The extension backend also needs Node.js 22+ and the pinned npm dependencies. Linux support is limited to offline processing.
+All platforms need Python 3.9 or later; 3.11+ is recommended for new installs. Browser workflows on Windows also need Node.js 22+. PubMed API tasks and PMC-only downloads need only Python and a network connection, with no Chrome, Node.js or extension.
 
-### Browser
-
-Currently, this Skill works with:
-
-**Google Chrome**
-
-Authentication, institutional access, and database permissions are provided entirely by the user's own Chrome browser environment.
-
----
+Google Chrome is the only supported browser.
 
 ## Installation
 
-The project is distributed as an **AI Skill**. Install it according to the Skill installation method supported by your AI Agent or Coding Agent.
+1. Download the package for your platform (`-windows.zip` or `-macos.zip`) from the [Latest Release](https://github.com/spectrum527/academic-automation-skill/releases/latest). Packages do not include Python, Node.js or Chrome.
+2. Unzip it to get the `cnki-download` folder (the Skill's name) and put the whole folder in your agent's skills directory. For Codex, you can copy it from a source checkout.
 
-Example (Codex / local skills folder):
+   ```bash
+   cp -R . ~/.agents/skills/cnki-download
+   ```
 
-```bash
-cp -R . ~/.agents/skills/cnki-download
-```
+3. Set up the browser for your platform.
+   - macOS: in Chrome, turn on View → Developer → Allow JavaScript from Apple Events. For automatic PDF saving, also grant Accessibility permission to the app that runs your agent in System Settings → Privacy & Security → Accessibility. See the [macOS guide](references/install-macos.md).
+   - Windows: install Microsoft's official Playwright Chrome extension, run `npm.cmd ci --ignore-scripts` in the unzipped folder, and give the extension Token to the agent's process environment. See the [Windows guide](references/install-windows.md).
+4. Optional: run `python3 -m pip install -r requirements-pdf.txt` in the Skill folder (`py -3` on Windows) to enable automatic article verification. Without it, files are still archived and the agent reports them as not automatically verified.
 
-Agent instructions live in `SKILL.md`. macOS needs **Allow JavaScript from Apple Events** and explicit `--backend apple-events`; follow the Windows installation instructions for the extension and supply its Token before connecting.
+macOS users can also choose [Legacy Version 1](LEGACY.md), the old 1.6.0 release without PubMed or Windows support. It has the same Skill name as RC1, so install only one of them.
 
-Tested with:
+Earlier macOS versions were tested in OpenCode and Qoder, as well as Cursor and OpenAI Codex. The new cross-platform version still needs to be re-tested in them. Agents differ in how they load Skills and call tools, so behavior may not be identical everywhere.
 
-- OpenCode
-- Qoder
-- Cursor
-- OpenAI Codex
+The agent's operating rules are in `SKILL.md`. Command-line usage is in the [CLI reference](references/cli.md) (Chinese).
 
-Skill handling, browser automation, and tool invocation may differ between agents, so identical behavior across all environments is not guaranteed.
+## When the agent stops to ask you
 
----
+In the cases below the agent pauses the current paper, tells you what it needs, and waits for your reply. No reply, or a timeout, is never treated as permission to skip.
 
-## How It Works
+- **Subscription scope.** Before searching PubMed, the CNKI foreign library, WoS or Scholar, it asks whether to include paid or subscription papers if you have not said so. If you decline, it asks whether to drop those papers or keep them as bibliography entries. Saying yes only lets it try your existing institutional access; it never buys anything.
+- **CAPTCHA, login or human verification.** It does not bypass these. You complete them in the browser and the task continues.
+- **A PDF that cannot be saved automatically.** If automatic saving fails and no file turns up in the download folder, it asks whether you want bibliography entries only, or want each paper's tab kept open so you can download them by hand at the end. Files you save by hand are still verified before archiving.
+- **A possible title mismatch.** If the title extracted from the PDF does not match the expected one, which can be a character-recognition glitch, it shows you both titles with the authors and DOI, and archives the file only after you confirm.
+- **Unclear free access.** If the publisher page has no evidence that this particular article is free, the paper stays pending for you to decide. It is not dropped automatically.
 
-Academic Automation Skill works through an AI agent controlling the user's own Chrome browser. Based on the research topic, keywords, or search criteria provided by the user, it interacts with supported academic databases to perform searching, filtering, downloading, and organization.
+If you tell it to stop everything, it cancels the whole batch and records that, so a later re-run will not restart it on its own.
 
-Academic Automation Skill **does not provide access privileges to any academic database**.
+## Accounts, access and responsible use
 
-If an article requires a subscription, purchase, or institutional authorization, the user must already have the appropriate access rights.
-
----
-
-## Accounts & Access
-
-This project:
-
-- does not provide CNKI, Google Scholar, or Web of Science accounts;
-- does not contain the developer's database credentials;
-- does not share the developer's authenticated sessions;
-- does not provide institutional subscriptions;
-- does not provide a method to obtain paid literature for free.
-
-When accessing academic databases through this Skill, users must use:
-
-**their own browser + their own account + their own authorized access privileges.**
-
----
-
-## CAPTCHA
-
-Academic Automation Skill **does not automatically bypass CAPTCHAs or similar human-verification mechanisms**.
-
-If a website requires a CAPTCHA or another interactive verification step, automation should pause and allow the user to complete it manually before continuing.
-
----
-
-## Third-Party Services
-
-Academic Automation Skill is an independent personal project.
-
-This project is not officially affiliated with, sponsored by, endorsed by, or associated with **CNKI**, **Google Scholar**, **Web of Science**, or their respective operators.
-
-All product names and trademarks belong to their respective owners.
-
-Users are responsible for ensuring that their use of Academic Automation Skill complies with the applicable terms and policies of academic databases, institutional subscriptions, and network environments.
-
-Academic Automation Skill does not circumvent authentication, paywalls, CAPTCHAs, or other access-control mechanisms.
-
----
-
-## Responsible Use
-
-The goal of Academic Automation Skill is to: **reduce repetitive and mechanical browser operations in academic research workflows.** It is not designed to grant users access privileges that have not already been provided by the relevant database or institution.
-
-Please use automation at a reasonable scale and frequency and respect the applicable rules of academic databases and institutions.
-
----
+- The project provides no accounts, subscriptions or institutional access for CNKI, Google Scholar, Web of Science or any other database. It contains none of the developer's credentials or login sessions.
+- All access goes through your own browser, account and existing permissions. The agent does not export cookies or copy your browser profile.
+- The project does not circumvent authentication, paywalls, CAPTCHAs or other access controls. It does not host, sell or redistribute full texts from any database.
+- Please keep the scale and frequency of automation reasonable and follow the rules of the databases and your institution. You are responsible for making sure your use complies with platform terms, institutional license agreements and applicable law.
+- This is an independent personal project. It is not affiliated with, sponsored by or endorsed by CNKI, Google Scholar, Web of Science or their operators. All product names and trademarks belong to their owners.
+- Third-party sites may change their terms, technical measures and access policies at any time. The maintainer cannot guarantee that they will keep allowing or supporting automated access.
 
 ## Development
 
-This is a personal project developed primarily through **Vibe Coding**.
+This is a personal project built mostly through Vibe Coding. The maintainer decides requirements and feature direction, and handles testing and releases. Generative AI, mainly Cursor and OpenAI's ChatGPT, was used heavily for coding and debugging, and also for refactoring, documentation and design discussions. AI-assisted development is a deliberate part of how this project is made, so it is stated here.
 
-Project requirements, feature direction, testing, and final release decisions are handled by the project maintainer, with extensive assistance from generative AI for coding, debugging, refactoring, documentation, and design discussions.
+The offline tests do not touch any website or account.
 
-Major AI tools used during development include:
+```bash
+python3 -B -X utf8 -m unittest discover -s tests -v
+```
 
-- **Cursor**
-- **ChatGPT by OpenAI**
+`python3 scripts/build_release.py` builds the release packages into `dist/`. Acceptance testing is described in [references/acceptance.md](references/acceptance.md) and [VERIFICATION.md](VERIFICATION.md).
 
-AI-assisted development is an intentional part of this project's development process and is therefore disclosed here explicitly.
-
----
-
-## Current Status
-
-Academic Automation Skill is under active development.
-
-Current priorities include:
-
-- improving search reliability across academic databases;
-- improving literature filtering and organization;
-- adapting to changes in database page structures;
-- testing compatibility with different AI agents;
-- developing and testing Windows support with other contributors.
-
-Bug reports, testing feedback, and compatibility reports are welcome.
-
----
+Current work focuses on more reliable searches across databases, better filtering and organization, keeping up with site changes, compatibility with more agents, and Windows support together with testers. If something breaks after a database updates its site, please open an issue. Test results and compatibility reports are welcome too.
 
 ## Changelog
 
-- **1.6.0** (2026-09-12) — Lower initial context use and resumable workflows:
+- **2.0.0 RC1**: see the [release notes](RELEASE_NOTES.md).
+- **1.6.0** (2026-09-12) Lower initial context use and resumable workflows.
   - Load workflow and troubleshooting references only when needed; reduce `SKILL.md` from 13,696 to 3,108 characters (77.3%).
   - Wait for stable page content and completed downloads; preserve WoS records recycled by virtual scrolling and detect download-time paywalls or CAPTCHA prompts.
   - Resume search pages and metadata collection, deduplicate batch entries by document identity, and reuse a 24-hour professional-search index with live detail verification.
   - Require the first author before starting Chinese downloads; use shared single-tab navigation for unknown publishers.
   - Add 16 regression tests and [verification results](VERIFICATION.md) covering live CNKI, WoS, Scholar, and OA download workflows.
-- **1.5.1** (2026-08-26) — Chinese library matching and file handling fixes: title search now goes through `korder=TI`; exact matches take priority (several substring matches no longer resolve to the first row); a short title without an author exits with code 64; `--affiliation` carries `TI=`/`AU=` as well; the detail, paywall, and verification pages are polled before and after the download click; files are archived by mtime; after a CAPTCHA the downloaded file is checked first; single-tab navigation now covers WoS, Scholar, and the foreign library; status tables accept two header layouts; bibliographic entries without a URL are no longer written into the list.
-- **1.5.0** (2026-08-26) — Download stability for the Chinese library:
+- **1.5.1** (2026-08-26) Chinese library matching and file handling fixes. Title search now goes through `korder=TI`; exact matches take priority (several substring matches no longer resolve to the first row); a short title without an author exits with code 64; `--affiliation` carries `TI=`/`AU=` as well; the detail, paywall, and verification pages are polled before and after the download click; files are archived by mtime; after a CAPTCHA the downloaded file is checked first; single-tab navigation now covers WoS, Scholar, and the foreign library; status tables accept two header layouts; bibliographic entries without a URL are no longer written into the list.
+- **1.5.0** (2026-08-26) Download stability for the Chinese library.
   - `cnki_dl.sh`: author check on the result row (titles of 6 characters or fewer require an author); `--expert` professional search (`SU='A' AND SU='B'`, which works around the advanced search button that ignores injected clicks); `--affiliation` institution filter; `《》〈〉""——` are stripped from the search URL automatically; NOMATCH scans up to 3 result pages (`--pages`); single-tab `set URL` with `window.stop()` before navigating; exit code 5 recognizes the paywall page at `bar.cnki.net/bar/fee`.
   - Added `scripts/cnki_batch.py`: `i/N` progress, an idempotent status table located by row number, pause and resume on CAPTCHA, and cleanup of surplus tabs in the front window every 10 papers.
   - Added `scripts/cnki_next.js` and `scripts/cnki_url.js`.
   - `SKILL.md`: scan the workspace before starting, how to use professional search, and "known pitfalls" (zsh `IFS`, cross-device `shutil.move`, JS return values, and how long `bar.cnki.net` order pages take).
-- **1.4.1** — CNKI foreign library (WWJD), quoted phrase search, DOI completion, publisher OA routing (`oa_dl.sh`), and the Web of Science / Google Scholar workflows.
+- **1.4.1** CNKI foreign library (WWJD), quoted phrase search, DOI completion, publisher OA routing (`oa_dl.sh`), and the Web of Science / Google Scholar workflows.
 
----
+## License
 
-## Disclaimer
-
-This project provides browser automation and academic-workflow assistance only.
-
-Academic Automation Skill does not host, sell, or redistribute full-text literature from CNKI, Google Scholar, Web of Science, or other third-party databases.
-
-Database access performed through this project relies on the user's own browser environment, account, and access privileges.
-
-The project maintainer cannot guarantee that third-party websites will always permit, support, or remain technically compatible with automated access. Terms of service, technical measures, and access policies may change over time.
-
-Users are responsible for determining whether their specific use complies with applicable platform rules, institutional license agreements, and laws and regulations.
-
----
-
-*Academic Automation Skill is a personal project and is still evolving. If something breaks after an academic database updates its website, feel free to open an issue.*
+[MIT License](LICENSE)

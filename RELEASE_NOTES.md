@@ -19,7 +19,7 @@ RC1 以 9 月 14 日的 macOS 与 Windows 测试反馈为依据，将正文识�
 | `academic-automation-legacy-v1.6.0-macos.zip` | macOS Legacy Version 1，保留原主分支运行源码；不包含 PubMed、Windows 后端及 2.0 的下载修复 |
 | `SHA256SUMS` | 上述三个 ZIP 的 SHA-256 校验值 |
 
-三个包解压后均为 `cnki-download`。RC1 与 Legacy 应选择其中一个作为活动安装，不能混合覆盖，也不应让 Agent 同时加载同名 Skill。包内不捆绑 Python、Node.js 或 Chrome，不包含登录信息、Token、个人任务和文献文件。Legacy 的 `LEGACY_SOURCE.json` 记录原提交与逐文件摘要，具体切换说明见 [Legacy Version 1](https://github.com/Alexme9125/academic-automation-skill/blob/v2.0.0-rc.1/LEGACY.md)。
+三个包解压后均为 `cnki-download`。RC1 与 Legacy 应选择其中一个作为活动安装，不能混合覆盖，也不应让 Agent 同时加载同名 Skill。包内不捆绑 Python、Node.js 或 Chrome，不包含登录信息、Token、个人任务和文献文件。Legacy 的 `LEGACY_SOURCE.json` 记录原提交与逐文件摘要，具体切换说明见 [Legacy Version 1](https://github.com/spectrum527/academic-automation-skill/blob/v2.0.0-rc.1/LEGACY.md)。
 
 ## 本版修复
 
@@ -73,11 +73,11 @@ npm.cmd ci --ignore-scripts
 
 可选正文核验依赖在 Skill 目录安装：macOS 用 `python3 -m pip install -r requirements-pdf.txt`，Windows 用 `py -3 -m pip install -r requirements-pdf.txt`。安装和下载只需相应网络访问及目标目录写入权限，不统一要求关闭 Harness 审批或使用全面文件访问。
 
-查询文件、仅 PMC 下载，以及整批取消的完整命令见 [PubMed 使用说明](https://github.com/Alexme9125/academic-automation-skill/blob/v2.0.0-rc.1/references/pubmed.md)。平台安装见 [macOS](https://github.com/Alexme9125/academic-automation-skill/blob/v2.0.0-rc.1/references/install-macos.md) 与 [Windows](https://github.com/Alexme9125/academic-automation-skill/blob/v2.0.0-rc.1/references/install-windows.md)。
+查询文件、仅 PMC 下载，以及整批取消的完整命令见 [PubMed 使用说明](https://github.com/spectrum527/academic-automation-skill/blob/v2.0.0-rc.1/references/pubmed.md)。平台安装见 [macOS](https://github.com/spectrum527/academic-automation-skill/blob/v2.0.0-rc.1/references/install-macos.md) 与 [Windows](https://github.com/spectrum527/academic-automation-skill/blob/v2.0.0-rc.1/references/install-windows.md)。
 
 ## 验证与不足
 
-本轮离线回归共 **191 项，190 项通过，1 项隔离 Chrome 测试按配置跳过**。新增 24 项覆盖本轮 Windows 反馈及打包约束，保留此前 167 项。禁用可选第三方 Python 包的回归结果、解压入口及 Legacy 文件核对记录见 [VERIFICATION.md](https://github.com/Alexme9125/academic-automation-skill/blob/v2.0.0-rc.1/VERIFICATION.md)。
+本轮离线回归共 **191 项，190 项通过，1 项隔离 Chrome 测试按配置跳过**。新增 24 项覆盖本轮 Windows 反馈及打包约束，保留此前 167 项。禁用可选第三方 Python 包的回归结果、解压入口及 Legacy 文件核对记录见 [VERIFICATION.md](https://github.com/spectrum527/academic-automation-skill/blob/v2.0.0-rc.1/VERIFICATION.md)。
 
 | 真实样本 | 本轮结果 |
 |---|---|

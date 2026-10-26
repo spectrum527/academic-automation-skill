@@ -66,7 +66,7 @@ Windows 测试者报告的 Beta 4 检索、题录与两篇 PMC 下载是此前�
 - Skill 元数据验证及差异格式检查通过。发布说明在最前面强调无障碍权限的范围和“有安全顾虑请勿使用”，两个包均包含同样的中英文 README 提示。
 - 下文保留不同阶段的实测证据；Oxford 后续 Apple Events 自动保存结果见[原生保存验收](references/macos-pdf-save-acceptance.md)。Windows、其他 Harness、中文保存窗口和批量保留标签页仍待分别验收。
 
-发布功能与限制见[Beta 4 说明](https://github.com/Alexme9125/academic-automation-skill/blob/v2.0.0-beta.4/RELEASE_NOTES.md)。本次验证输出保存在忽略目录 `tmp/beta4-release/` 及 `tmp/beta4-*-tests.log`，不随安装包分发。
+发布功能与限制见[Beta 4 说明](https://github.com/spectrum527/academic-automation-skill/blob/v2.0.0-beta.4/RELEASE_NOTES.md)。本次验证输出保存在忽略目录 `tmp/beta4-release/` 及 `tmp/beta4-*-tests.log`，不随安装包分发。
 
 ## 当前使用规则：macOS 仅 Apple Events
 
