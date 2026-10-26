@@ -52,7 +52,7 @@
 
 ## 安装
 
-1. 从 [Latest Release](https://github.com/spectrum527/academic-automation-skill/releases/latest) 下载对应平台的包，`-windows.zip` 或 `-macos.zip`。包里不带 Python、Node.js 和 Chrome。
+1. 从 [RC1 Release](https://github.com/spectrum527/academic-automation-skill/releases/tag/v2.0.0-rc.1) 下载对应平台的包，`-windows.zip` 或 `-macos.zip`。包里不带 Python、Node.js 和 Chrome。
 2. 解压得到 `cnki-download` 文件夹（这是本 Skill 的名字），整个放进你所用 Agent 的 Skill 目录。用 Codex 时，可以从源码目录复制过去。
 
    ```bash

@@ -52,7 +52,7 @@ Google Chrome is the only supported browser.
 
 ## Installation
 
-1. Download the package for your platform (`-windows.zip` or `-macos.zip`) from the [Latest Release](https://github.com/spectrum527/academic-automation-skill/releases/latest). Packages do not include Python, Node.js or Chrome.
+1. Download the package for your platform (`-windows.zip` or `-macos.zip`) from the [RC1 Release](https://github.com/spectrum527/academic-automation-skill/releases/tag/v2.0.0-rc.1). Packages do not include Python, Node.js or Chrome.
 2. Unzip it to get the `cnki-download` folder (the Skill's name) and put the whole folder in your agent's skills directory. For Codex, you can copy it from a source checkout.
 
    ```bash

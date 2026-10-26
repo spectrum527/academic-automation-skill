@@ -7,7 +7,7 @@
 Legacy Version 1 保留原主分支的 `1.6.0` 代码，面向需要继续使用旧版知网、Google Scholar 或 Web of Science 流程的 macOS 用户。它没有 2.0 的 PubMed 支持、Windows 后端或新的下载核验修复。
 
 - 保留分支：[legacy-version-1](https://github.com/spectrum527/academic-automation-skill/tree/legacy-version-1)。
-- 同一 [Latest Release](https://github.com/spectrum527/academic-automation-skill/releases/latest) 提供 `academic-automation-legacy-v1.6.0-macos.zip`。
+- 同一 [RC1 Release](https://github.com/spectrum527/academic-automation-skill/releases/tag/v2.0.0-rc.1) 提供 `academic-automation-legacy-v1.6.0-macos.zip`。
 - 历史 [v1.6.0 Release](https://github.com/spectrum527/academic-automation-skill/releases/tag/v1.6.0) 和此前标签继续保留。
 
 解压后仍得到 `cnki-download`。安装到当前 Agent 使用的 Skill 目录，整体选择 RC1 或 Legacy 其中一个版本；两者 Skill 名相同，不能混合覆盖源码，也不应同时作为活动 Skill 加载。切换前备份原安装及任务记录，保留已有文献。2.0 的检查点不能交给 1.x 续跑；旧流程按包内原始 `SKILL.md` 执行。
