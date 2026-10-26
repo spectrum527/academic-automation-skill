@@ -1,3 +1,17 @@
+# 2.0.0 RC2 发布验证（2026-10-26）
+
+本轮以新仓库 `spectrum527/academic-automation-skill` 发布 RC2，纳入维护者的 README、MIT 许可证和视觉资源修改；运行逻辑沿用 RC1。打包清单新增 README 引用的 Logo 与头图，并在已有可复现构建测试中核对两种语言的资源引用和字节内容。
+
+- 离线套件共 **191 项，190 项通过，1 项隔离 Chrome 测试按配置跳过**；测试不访问网站或账户。
+- 两个 RC2 平台包与 Legacy 包通过 ZIP 完整性和 SHA-256 核对。两个 RC2 包在中文及空格路径解压后，图片引用可解析，CLI 版本为 `2.0.0-rc.2`，平台默认后端分别为 extension 与 apple-events。
+- Legacy 运行源码与冻结提交 `cfa54f7828abd6361ba908ff87ccc891aa271255` 的逐文件摘要一致；仅附加的安装指引更新到新仓库。
+- 本机的 post-commit / post-checkout hooks 经检查均仅含 Qoder AI tracker，备份后删除。它们不属于受版本控制的源码，不会进入发布包；本轮 Git 提交不再触发这两个 hook。
+- 本次没有运行真实网站、Windows 原生入口、Chrome 扩展或出版社保存验收。以下历史结果不代表 RC2 已重新完成这些验收。
+
+测试日志和包检查记录保存在本机临时目录；发布附件为两端 RC2 包、Legacy 包及 SHA256SUMS。
+
+---
+
 # 2.0.0 RC1 发布验证（2026-09-14）
 
 版本 `2.0.0-rc.1`。RC1 纳入上一轮 PubMed 修复，以及 Windows Beta 4 报告中新发现的问题；发布为 Latest，跨平台源码更新到 `main`，原主分支 `cfa54f7828abd6361ba908ff87ccc891aa271255` 保留在 `legacy-version-1`。发布选择与权限提示见 [RELEASE_NOTES.md](RELEASE_NOTES.md)。

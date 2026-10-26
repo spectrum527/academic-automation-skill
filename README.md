@@ -12,7 +12,7 @@ Install this Skill in an AI agent and you can ask the agent for papers in plain 
 
 Everything runs in your own logged-in Chrome with your own account or institutional access. The project provides no database accounts and cannot get you paid papers for free.
 
-The current version is **2.0.0 RC1** (release candidate). See the [release notes](RELEASE_NOTES.md) for changes and the [verification record](VERIFICATION.md) for what has been tested.
+The current version is **2.0.0 RC2** (release candidate). See the [release notes](RELEASE_NOTES.md) for changes and the [verification record](VERIFICATION.md) for what has been tested.
 
 ## What you can ask for
 
@@ -43,7 +43,7 @@ Some automation may stop working for a while after a database changes its pages 
 | Platform | How the browser is controlled | Status |
 | --- | --- | --- |
 | macOS | Apple Events drive your everyday Chrome; native Save dialogs are handled through System Events. Playwright is not used | Main development and testing platform |
-| Windows 10/11 | Playwright CLI with the official Chrome extension; an extension Token is required before the first connection | Preview. Testers have reported PubMed search, bibliography and two PMC downloads working; the RC1 extension and publisher flows still need Windows acceptance testing |
+| Windows 10/11 | Playwright CLI with the official Chrome extension; an extension Token is required before the first connection | Preview. Testers have reported PubMed search, bibliography and two PMC downloads working; the RC2 extension and publisher flows still need Windows acceptance testing |
 | Linux | None | Offline processing only |
 
 All platforms need Python 3.9 or later; 3.11+ is recommended for new installs. Browser workflows on Windows also need Node.js 22+. PubMed API tasks and PMC-only downloads need only Python and a network connection, with no Chrome, Node.js or extension.
@@ -52,7 +52,7 @@ Google Chrome is the only supported browser.
 
 ## Installation
 
-1. Download the package for your platform (`-windows.zip` or `-macos.zip`) from the [RC1 Release](https://github.com/spectrum527/academic-automation-skill/releases/tag/v2.0.0-rc.1). Packages do not include Python, Node.js or Chrome.
+1. Download the package for your platform (`-windows.zip` or `-macos.zip`) from the [RC2 Release](https://github.com/spectrum527/academic-automation-skill/releases/tag/v2.0.0-rc.2). Packages do not include Python, Node.js or Chrome.
 2. Unzip it to get the `cnki-download` folder (the Skill's name) and put the whole folder in your agent's skills directory. For Codex, you can copy it from a source checkout.
 
    ```bash
@@ -64,7 +64,7 @@ Google Chrome is the only supported browser.
    - Windows: install Microsoft's official Playwright Chrome extension, run `npm.cmd ci --ignore-scripts` in the unzipped folder, and give the extension Token to the agent's process environment. See the [Windows guide](references/install-windows.md).
 4. Optional: run `python3 -m pip install -r requirements-pdf.txt` in the Skill folder (`py -3` on Windows) to enable automatic article verification. Without it, files are still archived and the agent reports them as not automatically verified.
 
-macOS users can also choose [Legacy Version 1](LEGACY.md), the old 1.6.0 release without PubMed or Windows support. It has the same Skill name as RC1, so install only one of them.
+macOS users can also choose [Legacy Version 1](LEGACY.md), the old 1.6.0 release without PubMed or Windows support. It has the same Skill name as RC2, so install only one of them.
 
 Earlier macOS versions were tested in OpenCode and Qoder, as well as Cursor and OpenAI Codex. The new cross-platform version still needs to be re-tested in them. Agents differ in how they load Skills and call tools, so behavior may not be identical everywhere.
 
@@ -107,7 +107,8 @@ Current work focuses on more reliable searches across databases, better filterin
 
 ## Changelog
 
-- **2.0.0 RC1**: see the [release notes](RELEASE_NOTES.md).
+- **2.0.0 RC2**: repository migration, refreshed documentation and branding, and bundled README images. See the [release notes](RELEASE_NOTES.md).
+- **2.0.0 RC1**: PubMed and Windows workflow fixes; retained as a historical release.
 - **1.6.0** (2026-09-12) Lower initial context use and resumable workflows.
   - Load workflow and troubleshooting references only when needed; reduce `SKILL.md` from 13,696 to 3,108 characters (77.3%).
   - Wait for stable page content and completed downloads; preserve WoS records recycled by virtual scrolling and detect download-time paywalls or CAPTCHA prompts.

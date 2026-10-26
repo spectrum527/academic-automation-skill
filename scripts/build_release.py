@@ -11,7 +11,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 ROOT_FILES = ('SKILL.md', 'README.md', 'README.zh-CN.md', 'LICENSE', 'AGENTS.md',
-              'VERIFICATION.md', 'RELEASE_NOTES.md', 'LEGACY.md', 'package.json', 'package-lock.json', 'requirements-pdf.txt')
+              'VERIFICATION.md', 'RELEASE_NOTES.md', 'LEGACY.md', 'package.json', 'package-lock.json', 'requirements-pdf.txt',
+              'assets/logo.png', 'assets/readme-banner.png')
 
 
 def source_files(root, target):

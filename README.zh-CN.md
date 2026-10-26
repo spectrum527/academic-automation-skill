@@ -12,7 +12,7 @@
 
 它用的是你自己已登录的 Chrome 和你本人的账户或机构权限。本项目不提供任何数据库账户，也不能帮你免费拿到付费文献。
 
-当前版本是 **2.0.0 RC1 候选版**，改动见[发布说明](RELEASE_NOTES.md)，实测范围见[验证记录](VERIFICATION.md)。
+当前版本是 **2.0.0 RC2 候选版**，改动见[发布说明](RELEASE_NOTES.md)，实测范围见[验证记录](VERIFICATION.md)。
 
 ## 能做什么
 
@@ -43,7 +43,7 @@
 | 平台 | 浏览器控制方式 | 状态 |
 | --- | --- | --- |
 | macOS | Apple Events 控制日常 Chrome，原生保存窗口通过 System Events 操作；不使用 Playwright | 主要开发和实测平台 |
-| Windows 10/11 | Playwright CLI 加官方 Chrome 扩展，首次连接前需要提供扩展 Token | 预览。测试者已回报 PubMed 检索、题录和两篇 PMC 下载跑通，RC1 的扩展和出版社流程仍待 Windows 实机验收 |
+| Windows 10/11 | Playwright CLI 加官方 Chrome 扩展，首次连接前需要提供扩展 Token | 预览。测试者已回报 PubMed 检索、题录和两篇 PMC 下载跑通，RC2 的扩展和出版社流程仍待 Windows 实机验收 |
 | Linux | 无 | 只支持离线数据处理 |
 
 所有平台都需要 Python 3.9 或更高版本，新安装建议用 3.11 以上。Windows 浏览器流程还要 Node.js 22 以上。只用 PubMed 接口或仅 PMC 下载时，只要 Python 和网络，不需要 Chrome、Node.js 或扩展。
@@ -52,7 +52,7 @@
 
 ## 安装
 
-1. 从 [RC1 Release](https://github.com/spectrum527/academic-automation-skill/releases/tag/v2.0.0-rc.1) 下载对应平台的包，`-windows.zip` 或 `-macos.zip`。包里不带 Python、Node.js 和 Chrome。
+1. 从 [RC2 Release](https://github.com/spectrum527/academic-automation-skill/releases/tag/v2.0.0-rc.2) 下载对应平台的包，`-windows.zip` 或 `-macos.zip`。包里不带 Python、Node.js 和 Chrome。
 2. 解压得到 `cnki-download` 文件夹（这是本 Skill 的名字），整个放进你所用 Agent 的 Skill 目录。用 Codex 时，可以从源码目录复制过去。
 
    ```bash
@@ -64,7 +64,7 @@
    - Windows：安装微软 Playwright 官方 Chrome 扩展，在解压目录运行 `npm.cmd ci --ignore-scripts`，并把扩展 Token 提供给运行 Agent 的进程环境。详见 [Windows 安装](references/install-windows.md)。
 4. 可选：在 Skill 目录运行 `python3 -m pip install -r requirements-pdf.txt`（Windows 用 `py -3`），启用正文自动核验。不装也能归档，Agent 会注明“正文未自动核验”。
 
-macOS 另有可选的 [Legacy Version 1](LEGACY.md)，即旧版 1.6.0，没有 PubMed 和 Windows 支持。它和 RC1 同名，只能二选一安装。
+macOS 另有可选的 [Legacy Version 1](LEGACY.md)，即旧版 1.6.0，没有 PubMed 和 Windows 支持。它和 RC2 同名，只能二选一安装。
 
 历史 macOS 版本在 OpenCode 和 Qoder 中测试过，Cursor 与 OpenAI Codex 上也测过。新的跨平台版本还需要重新验收。不同 Agent 调用 Skill 和工具的方式不一样，表现不保证完全一致。
 
@@ -107,7 +107,8 @@ python3 -B -X utf8 -m unittest discover -s tests -v
 
 ## 更新日志
 
-- **2.0.0 RC1**：见[发布说明](RELEASE_NOTES.md)。
+- **2.0.0 RC2**：迁移仓库，更新文档与视觉标识，安装包补齐 README 图片。见[发布说明](RELEASE_NOTES.md)。
+- **2.0.0 RC1**：PubMed 与 Windows 流程修复，保留历史发布。
 - **1.6.0**（2026-09-12）降低初始上下文占用，支持断点续跑。
   - 流程与排错参考文档按需加载；`SKILL.md` 从 13,696 缩至 3,108 字符，减少 77.3%。
   - 按页面稳定状态与文件完成状态等待；WoS 滚动时累计保留被虚拟列表回收的记录，下载等待期间持续识别收费页或验证码。

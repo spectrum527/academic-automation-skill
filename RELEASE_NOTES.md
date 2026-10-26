@@ -1,3 +1,29 @@
+# 2.0.0 RC2：新仓库、文档与视觉标识（2026-10-26）
+
+**重要权限与安全提示：macOS 界面自动化与 PDF 原生保存仍需要 Agent/Harness 的系统无障碍权限及 Chrome / System Events 自动化权限。若有任何安全顾虑，请勿使用本 Skill，也不要授予这些权限。Windows 当前仍由用户处理系统保存窗口。**
+
+RC2 在新仓库 `spectrum527/academic-automation-skill` 发布为 Pre-release。它沿用 RC1 的检索、下载与人工交接逻辑，不新增真实平台验收结论。
+
+- 保留本地 Git 历史、旧分支与标签，更新文档中的仓库链接；RC1 的重建发布继续保留。
+- 纳入维护者修订的中英文 README 与 MIT 许可证，以及 README 头图和独立 Logo。
+- 修复安装包缺少 README 图片的问题，两个平台包都包含对应资源；打包回归核对图片引用与字节内容。
+- 本地维护环境删除了两个仅用于 Qoder AI 代码追踪的 Git hooks，避免提交和检出时启动 Qoder CN。这是本机 `.git/hooks` 的清理，不会通过发布包修改用户的 Git 配置。
+
+| 附件 | 使用范围 |
+|---|---|
+| `academic-automation-v2.0.0-rc.2-windows.zip` | Windows RC2，官方 Playwright 扩展后端 |
+| `academic-automation-v2.0.0-rc.2-macos.zip` | macOS RC2，仅 Apple Events 后端 |
+| `academic-automation-legacy-v1.6.0-macos.zip` | 从保留的冻结提交重建的 macOS Legacy Version 1 |
+| `SHA256SUMS` | 本次三个 ZIP 的 SHA-256 校验值 |
+
+安装入口：[RC2 Release](https://github.com/spectrum527/academic-automation-skill/releases/tag/v2.0.0-rc.2)。候选版不标记为 Latest。两个 RC2 平台包使用当前 RC2 源码；Legacy 运行源码与原始 README 保持冻结版本，额外安装说明指向新仓库。
+
+验证范围见 [VERIFICATION.md](VERIFICATION.md)。Windows 原生扩展与出版社保存，以及不同 Harness 的完整流程仍需分别实测；本次不操作网站、账户或机构会话。
+
+---
+
+以下为 RC1 及此前的历史发布说明，其中 Latest 等描述记录当时状态；当前下载请使用上方 RC2 入口。
+
 > **重要权限与安全提示：本 Skill 会让 Agent/Harness 在执行 macOS 界面自动化和 PDF 原生保存时，向你索要系统无障碍（辅助功能）权限，以及控制 Chrome / System Events 的自动化权限。无障碍权限允许应用控制系统界面，授权范围不限于单个网页。若有任何安全顾虑，请勿使用本 Skill，也不要授予相关权限。**
 >
 > **Windows 当前通过 Playwright 官方扩展操作网页，系统保存窗口由用户处理。请审慎判断所用 Agent/Harness 请求的任何额外系统控制权限。RC1 两个平台包的中英文 README 均保留普通字号加粗的权限提示，Legacy 下载也附带权限说明。**

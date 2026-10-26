@@ -188,6 +188,10 @@ class PortableTests(unittest.TestCase):
                 self.assertIsNone(archive.testzip())
                 names = archive.namelist()
                 self.assertIn('cnki-download/SKILL.md',names)
+                for document in ('README.md', 'README.zh-CN.md'):
+                    text = archive.read('cnki-download/' + document).decode('utf-8')
+                    for asset in re.findall(r'(?:\]\(|src=")(assets/[^)"\s]+)', text):
+                        self.assertEqual(archive.read('cnki-download/' + asset), (ROOT/asset).read_bytes())
                 self.assertFalse(any('node_modules/' in n or '.academic-downloads/' in n or '.git/' in n for n in names))
                 if a.name.endswith('windows.zip'):
                     self.assertIn('cnki-download/academic.cmd',names)
