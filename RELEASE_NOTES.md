@@ -1,3 +1,11 @@
+# 未发布：统一技能名称（2026-10-30）
+
+当前源码的 Skill 名、安装目录说明和两平台新构建包的根目录统一为 `academic-automation`。版本号保持 `2.0.0-rc.2`，已发布附件不随源码修改而更新。Legacy 包继续使用冻结提交中的名称与原始内容；切换版本时只保留一个活动 Skill。
+
+新增 GitHub Actions 离线检查：在 Python 3.9 与 3.13 上运行回归测试，构建两平台与冻结 Legacy 包，并核对校验和。
+
+---
+
 # 2.0.0 RC2：新仓库、文档与视觉标识（2026-10-26）
 
 **重要权限与安全提示：macOS 界面自动化与 PDF 原生保存仍需要 Agent/Harness 的系统无障碍权限及 Chrome / System Events 自动化权限。若有任何安全顾虑，请勿使用本 Skill，也不要授予这些权限。Windows 当前仍由用户处理系统保存窗口。**
@@ -45,7 +53,7 @@ RC1 以 9 月 14 日的 macOS 与 Windows 测试反馈为依据，将正文识�
 | `academic-automation-legacy-v1.6.0-macos.zip` | macOS Legacy Version 1，保留原主分支运行源码；不包含 PubMed、Windows 后端及 2.0 的下载修复 |
 | `SHA256SUMS` | 上述三个 ZIP 的 SHA-256 校验值 |
 
-三个包解压后均为 `cnki-download`。RC1 与 Legacy 应选择其中一个作为活动安装，不能混合覆盖，也不应让 Agent 同时加载同名 Skill。包内不捆绑 Python、Node.js 或 Chrome，不包含登录信息、Token、个人任务和文献文件。Legacy 的 `LEGACY_SOURCE.json` 记录原提交与逐文件摘要，具体切换说明见 [Legacy Version 1](https://github.com/spectrum527/academic-automation-skill/blob/v2.0.0-rc.1/LEGACY.md)。
+当时的三个包使用相同的 Skill 目录名，名称见各包的 `SKILL.md`。RC1 与 Legacy 应选择其中一个作为活动安装，不能混合覆盖，也不应让 Agent 同时加载同名 Skill。包内不捆绑 Python、Node.js 或 Chrome，不包含登录信息、Token、个人任务和文献文件。Legacy 的 `LEGACY_SOURCE.json` 记录原提交与逐文件摘要，具体切换说明见 [Legacy Version 1](https://github.com/spectrum527/academic-automation-skill/blob/v2.0.0-rc.1/LEGACY.md)。
 
 ## 本版修复
 

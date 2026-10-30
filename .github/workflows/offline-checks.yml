@@ -1,0 +1,46 @@
+name: Offline checks
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: offline-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Python ${{ matrix.python }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ['3.9', '3.13']
+    env:
+      PYTHONDONTWRITEBYTECODE: '1'
+      ACADEMIC_BROWSER_TESTS: '0'
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-python@6d4fd22b20465ccc0f7354476588e8df7c9ca0e0 # v7.1.0
+        with:
+          python-version: ${{ matrix.python }}
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '22'
+          package-manager-cache: false
+      - name: Run offline regression tests
+        run: python -B -X utf8 -m unittest discover -s tests -v
+      - name: Build platform and frozen Legacy packages
+        run: python -B scripts/build_release.py --legacy-ref cfa54f7828abd6361ba908ff87ccc891aa271255
+      - name: Verify package checksums
+        working-directory: dist
+        run: sha256sum --check SHA256SUMS

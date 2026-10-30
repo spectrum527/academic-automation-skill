@@ -187,17 +187,18 @@ class PortableTests(unittest.TestCase):
             with zipfile.ZipFile(a) as archive:
                 self.assertIsNone(archive.testzip())
                 names = archive.namelist()
-                self.assertIn('cnki-download/SKILL.md',names)
+                self.assertEqual({name.split('/')[0] for name in names}, {'academic-automation'})
+                self.assertRegex(archive.read('academic-automation/SKILL.md').decode('utf-8'), r'(?m)^name: academic-automation$')
                 for document in ('README.md', 'README.zh-CN.md'):
-                    text = archive.read('cnki-download/' + document).decode('utf-8')
+                    text = archive.read('academic-automation/' + document).decode('utf-8')
                     for asset in re.findall(r'(?:\]\(|src=")(assets/[^)"\s]+)', text):
-                        self.assertEqual(archive.read('cnki-download/' + asset), (ROOT/asset).read_bytes())
+                        self.assertEqual(archive.read('academic-automation/' + asset), (ROOT/asset).read_bytes())
                 self.assertFalse(any('node_modules/' in n or '.academic-downloads/' in n or '.git/' in n for n in names))
                 if a.name.endswith('windows.zip'):
-                    self.assertIn('cnki-download/academic.cmd',names)
+                    self.assertIn('academic-automation/academic.cmd',names)
                     self.assertFalse(any(n.endswith('.sh') for n in names))
                 target = self.root/a.stem; archive.extractall(target)
-            skill = target/'cnki-download'
+            skill = target/'academic-automation'
             for link in re.findall(r'\]\(([^)]+)\)', (skill/'INSTALL.md').read_text(encoding='utf-8')):
                 if not re.match(r'(?:[a-zA-Z][\w+.-]*:|/|#)', link):
                     self.assertTrue((skill/link.split('#',1)[0]).is_file(), link)
