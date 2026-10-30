@@ -12,7 +12,7 @@ Install this Skill in an AI agent and you can ask the agent for papers in plain 
 
 Everything runs in your own logged-in Chrome with your own account or institutional access. The project provides no database accounts and cannot get you paid papers for free.
 
-The current version is **2.0.0 RC2** (release candidate). See the [release notes](RELEASE_NOTES.md) for changes and the [verification record](VERIFICATION.md) for what has been tested.
+The current version is **2.0.0 RC3** (release candidate). See the [release notes](RELEASE_NOTES.md) for changes and the [verification record](VERIFICATION.md) for what has been tested.
 
 ## What you can ask for
 
@@ -43,7 +43,7 @@ Some automation may stop working for a while after a database changes its pages 
 | Platform | How the browser is controlled | Status |
 | --- | --- | --- |
 | macOS | Apple Events drive your everyday Chrome; native Save dialogs are handled through System Events. Playwright is not used | Main development and testing platform |
-| Windows 10/11 | Playwright CLI with the official Chrome extension; an extension Token is required before the first connection | Preview. Testers have reported PubMed search, bibliography and two PMC downloads working; the RC2 extension and publisher flows still need Windows acceptance testing |
+| Windows 10/11 | Playwright CLI with the official Chrome extension; an extension Token is required before the first connection | Preview. Testers have reported PubMed search, bibliography and two PMC downloads working; the RC3 extension and publisher flows still need Windows acceptance testing |
 | Linux | None | Offline processing only |
 
 All platforms need Python 3.9 or later; 3.11+ is recommended for new installs. Browser workflows on Windows also need Node.js 22+. PubMed API tasks and PMC-only downloads need only Python and a network connection, with no Chrome, Node.js or extension.
@@ -52,7 +52,7 @@ Google Chrome is the only supported browser.
 
 ## Installation
 
-1. Download the package for your platform (`-windows.zip` or `-macos.zip`) from the [RC2 Release](https://github.com/spectrum527/academic-automation-skill/releases/tag/v2.0.0-rc.2). Packages do not include Python, Node.js or Chrome.
+1. Download the package for your platform (`-windows.zip` or `-macos.zip`) from the [RC3 Release](https://github.com/spectrum527/academic-automation-skill/releases/tag/v2.0.0-rc.3). Packages do not include Python, Node.js or Chrome.
 2. Put the whole Skill folder in your agent's skills directory. The current source and newly built packages use `academic-automation` for both the folder and Skill name; previously published packages retain the name in their bundled `SKILL.md`. For Codex, you can copy the current source checkout as follows.
 
    ```bash
@@ -109,6 +109,7 @@ Current work focuses on more reliable searches across databases, better filterin
 
 ## Changelog
 
+- **2.0.0 RC3**: unified Skill and package-root naming as `academic-automation`, with upgrade guidance and Python 3.9 / 3.13 offline CI. Legacy snapshots retain their original name and contents.
 - **2.0.0 RC2**: repository migration, refreshed documentation and branding, and bundled README images. See the [release notes](RELEASE_NOTES.md).
 - **2.0.0 RC1**: PubMed and Windows workflow fixes; retained as a historical release.
 - **1.6.0** (2026-09-12) Lower initial context use and resumable workflows.
