@@ -12,7 +12,7 @@
 
 它用的是你自己已登录的 Chrome 和你本人的账户或机构权限。本项目不提供任何数据库账户，也不能帮你免费拿到付费文献。
 
-当前版本是 **2.0.0 RC2 候选版**，改动见[发布说明](RELEASE_NOTES.md)，实测范围见[验证记录](VERIFICATION.md)。
+当前版本是 **2.0.0 RC3 候选版**，改动见[发布说明](RELEASE_NOTES.md)，实测范围见[验证记录](VERIFICATION.md)。
 
 ## 能做什么
 
@@ -43,7 +43,7 @@
 | 平台 | 浏览器控制方式 | 状态 |
 | --- | --- | --- |
 | macOS | Apple Events 控制日常 Chrome，原生保存窗口通过 System Events 操作；不使用 Playwright | 主要开发和实测平台 |
-| Windows 10/11 | Playwright CLI 加官方 Chrome 扩展，首次连接前需要提供扩展 Token | 预览。测试者已回报 PubMed 检索、题录和两篇 PMC 下载跑通，RC2 的扩展和出版社流程仍待 Windows 实机验收 |
+| Windows 10/11 | Playwright CLI 加官方 Chrome 扩展，首次连接前需要提供扩展 Token | 预览。测试者已回报 PubMed 检索、题录和两篇 PMC 下载跑通，RC3 的扩展和出版社流程仍待 Windows 实机验收 |
 | Linux | 无 | 只支持离线数据处理 |
 
 所有平台都需要 Python 3.9 或更高版本，新安装建议用 3.11 以上。Windows 浏览器流程还要 Node.js 22 以上。只用 PubMed 接口或仅 PMC 下载时，只要 Python 和网络，不需要 Chrome、Node.js 或扩展。
@@ -52,7 +52,7 @@
 
 ## 安装
 
-1. 从 [RC2 Release](https://github.com/spectrum527/academic-automation-skill/releases/tag/v2.0.0-rc.2) 下载对应平台的包，`-windows.zip` 或 `-macos.zip`。包里不带 Python、Node.js 和 Chrome。
+1. 从 [RC3 Release](https://github.com/spectrum527/academic-automation-skill/releases/tag/v2.0.0-rc.3) 下载对应平台的包，`-windows.zip` 或 `-macos.zip`。包里不带 Python、Node.js 和 Chrome。
 2. 将完整技能文件夹放进你所用 Agent 的 Skill 目录。当前源码及新构建包的目录名与 Skill 名均为 `academic-automation`；历史发布包仍以包内 `SKILL.md` 的名称为准。用 Codex 时，可以从当前源码目录复制过去。
 
    ```bash
@@ -109,6 +109,7 @@ python3 -B -X utf8 -m unittest discover -s tests -v
 
 ## 更新日志
 
+- **2.0.0 RC3**：Skill 名与安装包根目录统一为 `academic-automation`，补充升级说明及 Python 3.9 / 3.13 离线 CI；Legacy 保留冻结名称与内容。
 - **2.0.0 RC2**：迁移仓库，更新文档与视觉标识，安装包补齐 README 图片。见[发布说明](RELEASE_NOTES.md)。
 - **2.0.0 RC1**：PubMed 与 Windows 流程修复，保留历史发布。
 - **1.6.0**（2026-09-12）降低初始上下文占用，支持断点续跑。

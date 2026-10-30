@@ -1,8 +1,19 @@
-# 未发布：统一技能名称（2026-10-30）
+# 2.0.0 RC3：统一技能名称与离线 CI（2026-10-30）
 
-当前源码的 Skill 名、安装目录说明和两平台新构建包的根目录统一为 `academic-automation`。版本号保持 `2.0.0-rc.2`，已发布附件不随源码修改而更新。Legacy 包继续使用冻结提交中的名称与原始内容；切换版本时只保留一个活动 Skill。
+RC3 将 Skill 名、安装目录说明和 Windows/macOS 包的根目录统一为 `academic-automation`。版本号为 `2.0.0-rc.3`，历史发布附件保持原样。Legacy 包继续使用冻结提交中的名称与原始内容。
 
 新增 GitHub Actions 离线检查：在 Python 3.9 与 3.13 上运行回归测试，构建两平台与冻结 Legacy 包，并核对校验和。
+
+| 附件 | 使用范围 |
+|---|---|
+| `academic-automation-v2.0.0-rc.3-windows.zip` | Windows RC3，官方 Playwright 扩展后端 |
+| `academic-automation-v2.0.0-rc.3-macos.zip` | macOS RC3，仅 Apple Events 后端 |
+| `academic-automation-legacy-v1.6.0-macos.zip` | macOS Legacy Version 1，保留冻结源码 |
+| `SHA256SUMS` | 本次三个 ZIP 的 SHA-256 校验值 |
+
+安装入口：[RC3 Release](https://github.com/spectrum527/academic-automation-skill/releases/tag/v2.0.0-rc.3)。RC3 以 Pre-release 发布，不标记为 Latest。升级时保留任务记录和已下载文献，替换旧的活动 Skill，避免同时加载新旧名称的两份安装。
+
+本次仅调整名称、打包及检查流程，不新增真实网站或账户验收结论。验证范围见 [VERIFICATION.md](VERIFICATION.md)。以下为历史发布记录。
 
 ---
 
@@ -30,7 +41,7 @@ RC2 在新仓库 `spectrum527/academic-automation-skill` 发布为 Pre-release�
 
 ---
 
-以下为 RC1 及此前的历史发布说明，其中 Latest 等描述记录当时状态；当前下载请使用上方 RC2 入口。
+以下为 RC1 及此前的历史发布说明，其中 Latest 等描述记录当时状态；当前下载请使用上方 RC3 入口。
 
 > **重要权限与安全提示：本 Skill 会让 Agent/Harness 在执行 macOS 界面自动化和 PDF 原生保存时，向你索要系统无障碍（辅助功能）权限，以及控制 Chrome / System Events 的自动化权限。无障碍权限允许应用控制系统界面，授权范围不限于单个网页。若有任何安全顾虑，请勿使用本 Skill，也不要授予相关权限。**
 >
