@@ -1,5 +1,5 @@
 ---
-name: cnki-download
+name: academic-automation
 description: 在 PubMed、知网中文/外文库、Web of Science 或 Google Scholar 检索文献、整理带链接题录，按 PMID、DOI 或题名清单下载及归档可获取的全文。检索外文前确认订阅范围，支持人工验证后的续跑。PubMed 接口不依赖浏览器；浏览器流程沿用已登录 Chrome，Windows 使用 Playwright 官方扩展，macOS 仅使用 Apple Events。
 metadata:
   version: "2.0.0-rc.2"

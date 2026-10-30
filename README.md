@@ -53,18 +53,20 @@ Google Chrome is the only supported browser.
 ## Installation
 
 1. Download the package for your platform (`-windows.zip` or `-macos.zip`) from the [RC2 Release](https://github.com/spectrum527/academic-automation-skill/releases/tag/v2.0.0-rc.2). Packages do not include Python, Node.js or Chrome.
-2. Unzip it to get the `cnki-download` folder (the Skill's name) and put the whole folder in your agent's skills directory. For Codex, you can copy it from a source checkout.
+2. Put the whole Skill folder in your agent's skills directory. The current source and newly built packages use `academic-automation` for both the folder and Skill name; previously published packages retain the name in their bundled `SKILL.md`. For Codex, you can copy the current source checkout as follows.
 
    ```bash
-   cp -R . ~/.agents/skills/cnki-download
+   cp -R . ~/.agents/skills/academic-automation
    ```
+
+   When upgrading an existing installation, replace the old active Skill instead of keeping both names loaded. Preserve task records and downloaded papers.
 
 3. Set up the browser for your platform.
    - macOS: in Chrome, turn on View → Developer → Allow JavaScript from Apple Events. For automatic PDF saving, also grant Accessibility permission to the app that runs your agent in System Settings → Privacy & Security → Accessibility. See the [macOS guide](references/install-macos.md).
    - Windows: install Microsoft's official Playwright Chrome extension, run `npm.cmd ci --ignore-scripts` in the unzipped folder, and give the extension Token to the agent's process environment. See the [Windows guide](references/install-windows.md).
 4. Optional: run `python3 -m pip install -r requirements-pdf.txt` in the Skill folder (`py -3` on Windows) to enable automatic article verification. Without it, files are still archived and the agent reports them as not automatically verified.
 
-macOS users can also choose [Legacy Version 1](LEGACY.md), the old 1.6.0 release without PubMed or Windows support. It has the same Skill name as RC2, so install only one of them.
+macOS users can also choose [Legacy Version 1](LEGACY.md), the old 1.6.0 release without PubMed or Windows support. It retains its frozen Skill name; keep only one version active when switching.
 
 Earlier macOS versions were tested in OpenCode and Qoder, as well as Cursor and OpenAI Codex. The new cross-platform version still needs to be re-tested in them. Agents differ in how they load Skills and call tools, so behavior may not be identical everywhere.
 

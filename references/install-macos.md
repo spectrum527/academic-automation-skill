@@ -6,7 +6,7 @@
 
 > 新版优先使用[统一命令行](cli.md)。下列 `.sh` 示例仅为 macOS 兼容入口；Windows 使用对应的统一命令。站点选择器与匹配规则两平台共用，退出状态以新版 CLI 文档为准。
 
-下载 `academic-automation-v<版本号>-macos.zip` 并解压，将完整 `cnki-download` 文件夹放入 Agent 的技能目录。Python 核心最低 3.9；新安装建议使用 3.11+。
+下载 `academic-automation-v<版本号>-macos.zip` 并解压，将完整 `academic-automation` 文件夹放入 Agent 的技能目录。当前源码与新构建包使用此名称，历史发布包以包内 `SKILL.md` 的名称为准。Python 核心最低 3.9；新安装建议使用 3.11+。
 
 macOS **仅使用 Apple Events，不使用 Playwright，也不将它作为失败后的回退方案；不需要浏览器扩展、Token、Node.js 或 npm 依赖**。启用 Google Chrome → View → Developer → Allow JavaScript from Apple Events。浏览器命令显式传 `--backend apple-events`，避免继承旧扩展配置。使用自己的已登录 Chrome，系统首次请求应用自动化权限时按实际需要授权。
 

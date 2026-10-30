@@ -1,7 +1,7 @@
 {
   "name": "academic-automation-browser-runtime",
   "private": true,
-  "description": "Optional, pinned browser transport for the cnki-download skill",
+  "description": "Optional, pinned browser transport for the academic-automation skill",
   "dependencies": {
     "@playwright/cli": "0.1.19"
   }

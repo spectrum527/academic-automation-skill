@@ -53,18 +53,20 @@
 ## 安装
 
 1. 从 [RC2 Release](https://github.com/spectrum527/academic-automation-skill/releases/tag/v2.0.0-rc.2) 下载对应平台的包，`-windows.zip` 或 `-macos.zip`。包里不带 Python、Node.js 和 Chrome。
-2. 解压得到 `cnki-download` 文件夹（这是本 Skill 的名字），整个放进你所用 Agent 的 Skill 目录。用 Codex 时，可以从源码目录复制过去。
+2. 将完整技能文件夹放进你所用 Agent 的 Skill 目录。当前源码及新构建包的目录名与 Skill 名均为 `academic-automation`；历史发布包仍以包内 `SKILL.md` 的名称为准。用 Codex 时，可以从当前源码目录复制过去。
 
    ```bash
-   cp -R . ~/.agents/skills/cnki-download
+   cp -R . ~/.agents/skills/academic-automation
    ```
+
+   从已有安装升级时，替换旧的活动 Skill，避免同时加载新旧名称的两份安装；保留任务记录和已下载文献。
 
 3. 按平台完成浏览器配置。
    - macOS：在 Chrome 菜单中打开 View → Developer → Allow JavaScript from Apple Events。需要自动保存 PDF 时，再在“系统设置 → 隐私与安全性 → 辅助功能”里授权实际运行 Agent 的应用。详见 [macOS 安装](references/install-macos.md)。
    - Windows：安装微软 Playwright 官方 Chrome 扩展，在解压目录运行 `npm.cmd ci --ignore-scripts`，并把扩展 Token 提供给运行 Agent 的进程环境。详见 [Windows 安装](references/install-windows.md)。
 4. 可选：在 Skill 目录运行 `python3 -m pip install -r requirements-pdf.txt`（Windows 用 `py -3`），启用正文自动核验。不装也能归档，Agent 会注明“正文未自动核验”。
 
-macOS 另有可选的 [Legacy Version 1](LEGACY.md)，即旧版 1.6.0，没有 PubMed 和 Windows 支持。它和 RC2 同名，只能二选一安装。
+macOS 另有可选的 [Legacy Version 1](LEGACY.md)，即旧版 1.6.0，没有 PubMed 和 Windows 支持。它保留冻结版本的 Skill 名，切换时只保留一个活动版本。
 
 历史 macOS 版本在 OpenCode 和 Qoder 中测试过，Cursor 与 OpenAI Codex 上也测过。新的跨平台版本还需要重新验收。不同 Agent 调用 Skill 和工具的方式不一样，表现不保证完全一致。
 

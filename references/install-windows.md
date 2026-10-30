@@ -6,7 +6,7 @@
 
 面向 Windows 10/11 上能执行本地命令的 Coding Agents。已有 Windows 测试者回报部分流程跑通及下载问题，本版据此修复，真实扩展与网站仍待复测，各 Agent 需分别验收；不要把安装成功等同于功能验收通过。
 
-1. 下载 Release 中的 `academic-automation-v<版本号>-windows.zip`，解压得到 `cnki-download`。将完整目录放进所用 Agent 的 Skill 目录，或让 Agent 读取其 `SKILL.md`。
+1. 下载 Release 中的 `academic-automation-v<版本号>-windows.zip`，解压得到 `academic-automation`。当前源码与新构建包使用此名称，历史发布包以包内 `SKILL.md` 的名称为准。将完整目录放进所用 Agent 的 Skill 目录，或让 Agent 读取其 `SKILL.md`。
 2. 安装 Python（代码最低 3.9，新安装建议 3.11+）、Node.js 22+ 和 Google Chrome。Chrome 使用自己的日常账户及机构权限。
 3. 在 Chrome 安装[微软 Playwright 官方扩展](https://chromewebstore.google.com/detail/playwright-extension/mmlmfjhmonkocbjadbfplnigmagldckm)。需要能访问 Chrome Web Store；机构禁止扩展时不能宣称该后端可用。
 4. 在解压目录打开 PowerShell，安装锁定的依赖（不需要 Git Bash、WSL 或全局 npm 安装）：

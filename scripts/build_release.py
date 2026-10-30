@@ -32,8 +32,8 @@ def source_files(root, target):
         yield path.relative_to(root).as_posix(), path.read_bytes()
 
 
-def add(archive, name, data, executable=False):
-    info = zipfile.ZipInfo('cnki-download/' + name, (2026, 1, 1, 0, 0, 0))
+def add(archive, name, data, executable=False, skill_name='academic-automation'):
+    info = zipfile.ZipInfo(skill_name + '/' + name, (2026, 1, 1, 0, 0, 0))
     info.create_system = 3
     info.external_attr = (stat.S_IFREG | (0o755 if executable else 0o644)) << 16
     info.compress_type = zipfile.ZIP_DEFLATED
@@ -47,6 +47,10 @@ def legacy_asset(root, output, ref):
     skill = git('show', commit + ':SKILL.md')
     version = re.search(rb'version:\s*"([^"]+)"', skill).group(1).decode()
     if not re.fullmatch(r'1\.[0-9A-Za-z.-]+', version): raise ValueError('Legacy must be a version 1 Skill snapshot')
+    # Frozen snapshots retain their original Skill name and payload bytes.
+    name_match = re.search(rb'^name:[ \t]*([a-z0-9]+(?:-[a-z0-9]+)*)[ \t]*\r?$', skill, re.MULTILINE)
+    if not name_match: raise ValueError('Legacy snapshot must declare a valid Skill name')
+    skill_name = name_match.group(1).decode()
     names = git('ls-tree', '-r', '--name-only', commit).decode().splitlines()
     selected = [name for name in names if name in ('SKILL.md', 'README.md', 'README.zh-CN.md', 'LICENSE', 'AGENTS.md', 'VERIFICATION.md')
                 or (Path(name).parts[0] in ('scripts', 'references', 'tests')
@@ -57,10 +61,10 @@ def legacy_asset(root, output, ref):
         for name in selected:
             data = git('show', commit + ':' + name)
             payload[name] = hashlib.sha256(data).hexdigest()
-            add(archive, name, data, name.endswith('.sh'))
+            add(archive, name, data, name.endswith('.sh'), skill_name=skill_name)
         add(archive, 'LEGACY_SOURCE.json', json.dumps({'label': 'Legacy Version 1', 'version': version,
-            'commit': commit, 'files_sha256': payload}, indent=2) + '\n')
-        add(archive, 'INSTALL.md', (root / 'LEGACY.md').read_bytes())
+            'commit': commit, 'files_sha256': payload}, indent=2) + '\n', skill_name=skill_name)
+        add(archive, 'INSTALL.md', (root / 'LEGACY.md').read_bytes(), skill_name=skill_name)
     return path
 
 

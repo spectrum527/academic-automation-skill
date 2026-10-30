@@ -1,6 +1,6 @@
 # AGENTS.md
 
-This repository is the `cnki-download` AI Skill, not a hosted app.
+This repository is the `academic-automation` AI Skill, not a hosted app.
 
 ## Architecture
 
@@ -25,6 +25,7 @@ This repository is the `cnki-download` AI Skill, not a hosted app.
 ## Verification
 
 - Offline: `python3 -B -X utf8 -m unittest discover -s tests -v`. Node is used for JavaScript fixture tests; no website or account is accessed.
+- GitHub Actions: `.github/workflows/offline-checks.yml` runs the offline suite and package/checksum checks on Python 3.9 and 3.13. It does not run browser or account acceptance tests.
 - Opt-in isolated Chrome transport test: set `ACADEMIC_BROWSER_TESTS=1` and run the tests after installing npm dependencies. This does not validate the official extension or institution sessions.
 - Package: `python3 scripts/build_release.py`; creates two ZIPs and SHA256SUMS in ignored `dist/`, without publishing or tagging. Add `--legacy-ref <frozen v1 commit>` to include the macOS Legacy Version 1 asset.
 - Real platform/site/Agent acceptance is documented in `references/acceptance.md` and `VERIFICATION.md`. Windows real-world testing is assigned to a tester and must not be claimed from macOS results.

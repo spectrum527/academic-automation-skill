@@ -219,7 +219,7 @@ class RC1FeedbackTests(unittest.TestCase):
         import build_release
         import zipfile
         commit = '1'*40
-        blobs = {'SKILL.md':b'---\nmetadata:\n  version: "1.6.0"\n---\n',
+        blobs = {'SKILL.md':b'---\nname: legacy-skill\nmetadata:\n  version: "1.6.0"\n---\n',
                  'scripts/run.sh':b'#!/bin/sh\necho legacy\n', 'README.md':b'Original README\n',
                  'state/token.json':b'secret', 'papers/private.pdf':b'private'}
         def git(cmd):
@@ -231,13 +231,15 @@ class RC1FeedbackTests(unittest.TestCase):
         with patch.object(build_release.subprocess,'check_output',side_effect=git):
             path = build_release.legacy_asset(ROOT,self.root,'legacy-version-1')
         with zipfile.ZipFile(path) as z:
-            self.assertEqual(z.read('cnki-download/scripts/run.sh'),blobs['scripts/run.sh'])
-            self.assertEqual(z.read('cnki-download/README.md'),blobs['README.md'])
-            self.assertNotIn('cnki-download/state/token.json',z.namelist())
-            meta=json.loads(z.read('cnki-download/LEGACY_SOURCE.json'))
+            self.assertEqual({name.split('/')[0] for name in z.namelist()}, {'legacy-skill'})
+            self.assertEqual(z.read('legacy-skill/SKILL.md'),blobs['SKILL.md'])
+            self.assertEqual(z.read('legacy-skill/scripts/run.sh'),blobs['scripts/run.sh'])
+            self.assertEqual(z.read('legacy-skill/README.md'),blobs['README.md'])
+            self.assertNotIn('legacy-skill/state/token.json',z.namelist())
+            meta=json.loads(z.read('legacy-skill/LEGACY_SOURCE.json'))
             self.assertEqual(meta['commit'],commit)
             self.assertEqual(meta['files_sha256']['scripts/run.sh'],hashlib.sha256(blobs['scripts/run.sh']).hexdigest())
-            self.assertIn('Accessibility',z.read('cnki-download/INSTALL.md').decode())
+            self.assertIn('Accessibility',z.read('legacy-skill/INSTALL.md').decode())
 
     def test_article_lock_prevents_cross_route_duplicate_transfer(self):
         key=hashlib.sha256(('123\0'+str(self.dest.resolve())).encode()).hexdigest()[:24]
