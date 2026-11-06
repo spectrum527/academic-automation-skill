@@ -95,7 +95,7 @@ If you tell it to stop everything, it cancels the whole batch and records that, 
 
 ## Development
 
-This is a personal project built mostly through Vibe Coding. The maintainer decides requirements and feature direction, and handles testing and releases. Generative AI, mainly Cursor and OpenAI's ChatGPT, was used heavily for coding and debugging, and also for refactoring, documentation and design discussions. AI-assisted development is a deliberate part of how this project is made, so it is stated here.
+This is a personal project built mostly through Vibe Coding. The maintainer, [Alexme9125](https://github.com/Alexme9125), decides requirements and feature direction, and handles testing and releases. Generative AI, including [Cursor Agent](https://github.com/cursoragent), [Codex](https://github.com/codex), and OpenAI's ChatGPT, has assisted with coding, debugging, refactoring, documentation, and design discussions. AI-assisted development is a deliberate part of how this project is made.
 
 The offline tests do not touch any website or account.
 
