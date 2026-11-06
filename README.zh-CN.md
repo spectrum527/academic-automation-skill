@@ -95,7 +95,7 @@ Agent 的操作规则写在 `SKILL.md`，命令行用法见[统一命令行](ref
 
 ## 开发
 
-这是一个主要用 Vibe Coding 开发的个人项目。需求和功能方向由维护者决定，测试与发布也由维护者负责。写代码和调试时大量使用了生成式 AI，主要是 Cursor 和 OpenAI 的 ChatGPT，重构、写文档和讨论设计也用到了它们。我认为 AI 辅助是本项目开发方式的一部分，所以在这里写明。
+这是一个主要用 Vibe Coding 开发的个人项目。需求和功能方向由维护者 [Alexme9125](https://github.com/Alexme9125) 决定，测试与发布也由维护者负责。写代码、调试、重构、写文档和讨论设计时使用了生成式 AI，包括 [Cursor Agent](https://github.com/cursoragent)、[Codex](https://github.com/codex) 和 OpenAI 的 ChatGPT。AI 辅助是本项目开发方式的一部分，所以在这里写明。
 
 离线测试不访问任何网站或账户。
 
